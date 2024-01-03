@@ -1,2 +1,2 @@
 # M3UManager
-About A .NET Standard 2.1 library for full manage M3U playlists.
+.NETStandard library for complete management of M3U playlists
