@@ -3,9 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M3UManager", "M3UManager\M3UManager.csproj", "{7D875786-5FDF-479D-B173-FBD6712A569D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3UManager", "M3UManager\M3UManager.csproj", "{7D875786-5FDF-479D-B173-FBD6712A569D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M3UManager.Tests", "M3UManager.Tests\M3UManager.Tests.csproj", "{32007681-D748-4F8D-8272-C18E797C5680}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3UManager.Tests", "M3UManager.Tests\M3UManager.Tests.csproj", "{32007681-D748-4F8D-8272-C18E797C5680}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4698AA42-4194-4213-B6E9-5724AEB9EC9A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3F186D51-DE27-4A50-82DD-388825A1993A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{B9260F2E-7DA9-47AF-A0D6-0C1514CA366A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "branding", "branding", "{83FE21D6-D211-48E5-B9CA-BD5051E632C5}"
+	ProjectSection(SolutionItems) = preProject
+		M3UManager\branding\m3u.jpg = M3UManager\branding\m3u.jpg
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +35,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7D875786-5FDF-479D-B173-FBD6712A569D} = {4698AA42-4194-4213-B6E9-5724AEB9EC9A}
+		{32007681-D748-4F8D-8272-C18E797C5680} = {3F186D51-DE27-4A50-82DD-388825A1993A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A3A3B52-C902-4B9E-AFD6-3883D0DD98C7}

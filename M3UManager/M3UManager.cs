@@ -32,16 +32,16 @@ namespace M3UManager
 
                     switch (tagKey)
                     {
-                        case "EXT-X-PLAYLIST-TYPE":
+                        case "#EXT-X-PLAYLIST-TYPE":
                             m3u.PlayListType = tagValueWithoutKey;
                             break;
-                        case "EXT-X-TARGETDURATION":
+                        case "#EXT-X-TARGETDURATION":
                             m3u.TargetDuration = int.Parse(tagValueWithoutKey);
                             break;
-                        case "EXT-X-VERSION":
+                        case "#EXT-X-VERSION":
                             m3u.Version = int.Parse(tagValueWithoutKey);
                             break;
-                        case "EXT-X-MEDIA-SEQUENCE":
+                        case "#EXT-X-MEDIA-SEQUENCE":
                             m3u.MediaSequence = int.Parse(tagValueWithoutKey);
                             break;
 
@@ -52,7 +52,7 @@ namespace M3UManager
                             tempMedia.ExtinfTag.TagAttributes.GroupTitle = tagValueWithoutKey;
                             break;
 
-                        case "EXT-X-ENDLIST":
+                        case "#EXT-X-ENDLIST":
                             m3u.HasEndList = true;
                             break;
                     }

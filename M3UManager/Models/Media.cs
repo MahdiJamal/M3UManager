@@ -1,8 +1,6 @@
-﻿using M3UManager.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
-namespace M3UManager
+namespace M3UManager.Models
 {
     public class Media : ICloneable
     {
@@ -10,9 +8,9 @@ namespace M3UManager
         public ExtinfTag ExtinfTag { get; set; }
 
         public object Clone()
-            => this.MemberwiseClone();
+            => MemberwiseClone();
         public T Clone<T>()
-            => (T)this.Clone();
+            => (T)Clone();
 
         public void Reset()
         {
