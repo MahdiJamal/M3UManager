@@ -1,0 +1,5 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="HDTV.fr" tvg-logo="https://o.imur.om/xyW0wD.png" group-title="Undefined",HDTV (720p) [Not 24/7]
+http://0.0.0.0/hbbh/stream.m3u8
+#EXTINF:-1 tvg-id="HDTV.fr" tvg-logo="https://y.imyr.cm/xy70wD.png" group-title="Undefined",HDTV (720p)
+http://0.0.0.0/hbbh/stream.m3u8
