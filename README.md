@@ -14,4 +14,4 @@ If you like this project please ⭐ it by clicking on the star button at the top
 If you are feeling generous, you can buy me a coffee by donating through Bitcoin.</br>
 Either way - **Thank you!** 🎉
 
-[<img src="https://img.shields.io/github/stars/MahdiJamal/M3UManager?color=green&label=star%20it%20on%20GitHub" width="132" height="20" alt="Star it on GitHub"/>](https://github.com/MahdiJamal/M3UManager) [![Donate](https://img.shields.io/badge/Donate-Bitcoin-gold)]()
+[![GitHub stars](https://img.shields.io/github/stars/MahdiJamal/M3UManager?color=green&label=star%20it%20on%20GitHub)](https://github.com/MahdiJamal/M3UManager) [![Donate](https://img.shields.io/badge/Donate-Bitcoin-gold)]()
