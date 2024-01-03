@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<OutputType>Library</OutputType>
+		<Nullable>disable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>M3U Manager</Title>
+		<PackageTags>package,manager,internet,video,channel,movie,music,m3u,m3u8,media,tv,television,iptv,net,netstandard,netstandard2</PackageTags>
+		<RepositoryUrl>https://github.com/MahdiJamal/M3UManager</RepositoryUrl>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<RepositoryType>git</RepositoryType>
+		<AssemblyVersion>1.0.0.1</AssemblyVersion>
+		<FileVersion>$(AssemblyVersion)</FileVersion>
+		<Version>$(AssemblyVersion)</Version>
+		<Authors>MahdiJamal</Authors>
+		<PackageIcon>m3u.jpg</PackageIcon>
+		<Description>Library for complete management of M3U playlists.</Description>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\branding\m3u.jpg">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\..\LICENSE">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+
+</Project>

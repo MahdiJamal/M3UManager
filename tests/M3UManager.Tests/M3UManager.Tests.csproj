@@ -17,8 +17,4 @@
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\src\M3UManager\M3UManager.csproj" />
-  </ItemGroup>
-
 </Project>

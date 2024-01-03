@@ -1,22 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.5.33424.131
+VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3UManager", "M3UManager\M3UManager.csproj", "{7D875786-5FDF-479D-B173-FBD6712A569D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4BB2D89B-955C-4DC2-B7B5-112DCC1D18F5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3UManager.Tests", "M3UManager.Tests\M3UManager.Tests.csproj", "{32007681-D748-4F8D-8272-C18E797C5680}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3UManager", "src\M3UManager\M3UManager.csproj", "{96E1B3DD-3FF7-4ED2-ACAB-C31EDB69E5C8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4698AA42-4194-4213-B6E9-5724AEB9EC9A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E1957E0D-84FB-4D43-AD8A-452A50FEA7D2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3F186D51-DE27-4A50-82DD-388825A1993A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{B9260F2E-7DA9-47AF-A0D6-0C1514CA366A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "branding", "branding", "{83FE21D6-D211-48E5-B9CA-BD5051E632C5}"
-	ProjectSection(SolutionItems) = preProject
-		M3UManager\branding\m3u.jpg = M3UManager\branding\m3u.jpg
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M3UManager.Tests", "M3UManager.Tests\M3UManager.Tests.csproj", "{7F65ED40-1339-40E0-8D9F-BA0AB3E4D6D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,23 +17,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7D875786-5FDF-479D-B173-FBD6712A569D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7D875786-5FDF-479D-B173-FBD6712A569D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7D875786-5FDF-479D-B173-FBD6712A569D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7D875786-5FDF-479D-B173-FBD6712A569D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32007681-D748-4F8D-8272-C18E797C5680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32007681-D748-4F8D-8272-C18E797C5680}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32007681-D748-4F8D-8272-C18E797C5680}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32007681-D748-4F8D-8272-C18E797C5680}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96E1B3DD-3FF7-4ED2-ACAB-C31EDB69E5C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96E1B3DD-3FF7-4ED2-ACAB-C31EDB69E5C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96E1B3DD-3FF7-4ED2-ACAB-C31EDB69E5C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96E1B3DD-3FF7-4ED2-ACAB-C31EDB69E5C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F65ED40-1339-40E0-8D9F-BA0AB3E4D6D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F65ED40-1339-40E0-8D9F-BA0AB3E4D6D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F65ED40-1339-40E0-8D9F-BA0AB3E4D6D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F65ED40-1339-40E0-8D9F-BA0AB3E4D6D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7D875786-5FDF-479D-B173-FBD6712A569D} = {4698AA42-4194-4213-B6E9-5724AEB9EC9A}
-		{32007681-D748-4F8D-8272-C18E797C5680} = {3F186D51-DE27-4A50-82DD-388825A1993A}
+		{96E1B3DD-3FF7-4ED2-ACAB-C31EDB69E5C8} = {4BB2D89B-955C-4DC2-B7B5-112DCC1D18F5}
+		{7F65ED40-1339-40E0-8D9F-BA0AB3E4D6D7} = {E1957E0D-84FB-4D43-AD8A-452A50FEA7D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3A3A3B52-C902-4B9E-AFD6-3883D0DD98C7}
+		SolutionGuid = {1B2490EB-976E-446E-A39D-19A1F8451F29}
 	EndGlobalSection
 EndGlobal
