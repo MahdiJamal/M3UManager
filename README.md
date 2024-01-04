@@ -16,7 +16,7 @@ If you are feeling generous, you can buy me a coffee by donating through Bitcoin
 Either way - **Thank you!** 🎉
 
 [![GitHub stars](https://img.shields.io/github/stars/MahdiJamal/M3UManager?color=green&label=star%20it%20on%20GitHub)](https://github.com/MahdiJamal/M3UManager)\
-[![Donate bitcoin](branding/donate-bitcoin.png)](bitcoin:bc1q2m03tfsuru4jgtl948vnavd5l8k2yjr7kx34wh)\
+[![Donate bitcoin](https://raw.githubusercontent.com/MahdiJamal/M3UManager/master/branding/donate-bitcoin.png)](bitcoin:bc1q2m03tfsuru4jgtl948vnavd5l8k2yjr7kx34wh)\
 **bc1q2m03tfsuru4jgtl948vnavd5l8k2yjr7kx34wh**
 
 ## Code of Conduct
