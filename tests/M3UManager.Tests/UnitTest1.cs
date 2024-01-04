@@ -5,6 +5,7 @@ namespace M3UManager.Tests
         [SetUp]
         public void Setup()
         {
+
         }
 
         [Test]
