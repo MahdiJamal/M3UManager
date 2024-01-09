@@ -1,6 +1,9 @@
-﻿namespace M3UManager.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class ExtinfTag(ExtinfTagAttributes extinfTagAttributes)
+namespace M3UManager.Models;
+
+public partial class ExtinfTag(ExtinfTagAttributes extinfTagAttributes) : ObservableObject
 {
-    public ExtinfTagAttributes TagAttributes { get; set; } = extinfTagAttributes;
+    [ObservableProperty]
+    private ExtinfTagAttributes _tagAttributes = extinfTagAttributes;
 }
