@@ -1,16 +1,28 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Text.RegularExpressions;
 
 namespace M3UManager.Models;
 
-public class ExtinfTagAttributes
+public partial class ExtinfTagAttributes: ObservableObject
 {
-    public string TvgID { get; set; }
-    public string TvgName { get; set; }
-    public string TvgLogo { get; set; }
-    public string GroupTitle { get; set; }
-    public string Duration { get; set; }
-    public string Title { get; set; }
+    [ObservableProperty]
+    private string _tvgID;
+
+    [ObservableProperty]
+    private string _tvgName;
+
+    [ObservableProperty]
+    private string _tvgLogo;
+
+    [ObservableProperty]
+    private string _groupTitle;
+
+    [ObservableProperty]
+    private string _duration;
+
+    [ObservableProperty]
+    private string _title;
 
     public static ExtinfTagAttributes Parse(string extinfTagAttributesWithoutTagName)
     {

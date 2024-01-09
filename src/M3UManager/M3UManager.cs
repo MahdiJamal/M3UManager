@@ -2,6 +2,8 @@
 using M3UManager.Utilities;
 using System;
 using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace M3UManager;
 
@@ -9,11 +11,22 @@ public static class M3UManager
 {
     private const string M3UFileStartLine = "#EXTM3U";
 
-    public static M3U ParseFromFile(string m3uFilePath)
-        => Parse(File.ReadAllLines(m3uFilePath));
-    public static M3U Parse(string m3uFileContent)
-        => Parse(m3uFileContent.Split("\r\n", "\n", "\r"));
-    public static M3U Parse(string[] m3uFileLines)
+    public static async Task<M3U> ParseFromUrlAsync(string url)
+    {
+        using HttpClient tempHttpClient = new();
+        return await ParseFromUrlAsync(url, tempHttpClient);
+    }
+    public static async Task<M3U> ParseFromUrlAsync(string url, HttpClient client)
+    {
+        HttpResponseMessage httpResponseMessage = await client.GetAsync(url);
+        string httpResponseMessageString = await httpResponseMessage.Content.ReadAsStringAsync();
+        return ParseFromString(httpResponseMessageString);
+    }
+    public static async Task<M3U> ParseFromFileAsync(string m3uFilePath)
+        => ParseFromLines(await File.ReadAllLinesAsync(m3uFilePath));
+    public static M3U ParseFromString(string m3uFileContent)
+        => ParseFromLines(m3uFileContent.Split("\r\n", "\n", "\r"));
+    public static M3U ParseFromLines(string[] m3uFileLines)
     {
         if (m3uFileLines == null)
             throw new ArgumentNullException($"The '{nameof(m3uFileLines)}' variable value is null.");
@@ -62,7 +75,7 @@ public static class M3UManager
             }
             else if (m3uFileLines[i].StartsWith("http"))
             {
-                tempMedia.StreamUri = new Uri(m3uFileLines[i]);
+                tempMedia.MediaUri = new Uri(m3uFileLines[i]);
                 m3u.Medias.Add(tempMedia.Clone<Media>());
                 tempMedia.Reset();
             }

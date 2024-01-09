@@ -1,21 +1,37 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace M3UManager.Models;
 
-public partial class M3U
+public partial class M3U : ObservableObject
 {
-    public string PlayListType { get; set; }
-    public bool HasEndList { get; set; }
-    public int? TargetDuration { get; set; }
-    public int? Version { get; set; }
-    public int? MediaSequence { get; set; }
-    public List<Media> Medias { get; set; } = [];
+    [ObservableProperty]
+    private string _playListType = null;
 
-    public void SaveToFile(string filePathToSave, M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
-        => File.WriteAllLines(filePathToSave, GetM3UAsString(groupTitle));
-    public IEnumerable<string> GetM3UAsString(M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
+    [ObservableProperty]
+    private bool _hasEndList = false;
+
+    [ObservableProperty]
+    private int? _targetDuration = null;
+
+    [ObservableProperty]
+    private int? _version = null;
+
+    [ObservableProperty]
+    private int? _mediaSequence = null;
+
+    [ObservableProperty]
+    private ObservableCollection<Media> _medias = [];
+
+    public async Task SaveM3UFileAsync(string filePathToSave, M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
+        => await File.WriteAllLinesAsync(filePathToSave, CreateM3ULines(groupTitle));
+    public void CreateM3UText(M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
+        => string.Join("\r\n", CreateM3ULines(groupTitle));
+    public IEnumerable<string> CreateM3ULines(M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
     {
         yield return "#EXTM3U";
 
@@ -37,7 +53,7 @@ public partial class M3U
                 foreach (Media media in Medias)
                 {
                     yield return $"#EXTINF:{media.ExtinfTag.TagAttributes}";
-                    yield return media.StreamUri.AbsoluteUri;
+                    yield return media.MediaUri.AbsoluteUri;
                 }
                 break;
             case M3UGroupTitle.OutlineGroupTitle:

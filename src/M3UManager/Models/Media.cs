@@ -1,11 +1,15 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 
 namespace M3UManager.Models;
 
-public class Media : ICloneable
+public partial class Media : ObservableObject, ICloneable
 {
-    public Uri StreamUri { get; set; }
-    public ExtinfTag ExtinfTag { get; set; }
+    [ObservableProperty]
+    private Uri _mediaUri;
+
+    [ObservableProperty]
+    private ExtinfTag _extinfTag;
 
     public object Clone()
         => MemberwiseClone();
@@ -14,7 +18,7 @@ public class Media : ICloneable
 
     public void Reset()
     {
-        StreamUri = null;
+        MediaUri = null;
         ExtinfTag = null;
     }
 }
