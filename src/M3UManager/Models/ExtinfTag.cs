@@ -1,12 +1,6 @@
-﻿namespace M3UManager.Models
-{
-    public class ExtinfTag
-    {
-        public ExtinfTagAttributes TagAttributes { get; set; }
+﻿namespace M3UManager.Models;
 
-        public ExtinfTag(ExtinfTagAttributes extinfTagAttributes)
-        {
-            this.TagAttributes = extinfTagAttributes;
-        }
-    }
+public class ExtinfTag(ExtinfTagAttributes extinfTagAttributes)
+{
+    public ExtinfTagAttributes TagAttributes { get; set; } = extinfTagAttributes;
 }
