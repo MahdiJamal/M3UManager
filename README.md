@@ -1,20 +1,28 @@
 # M3U Manager
 
 **Created with ❤ in Iran by Mahdi Jamal**\
-A simple way to read and edit m3u file with C#.\
+A simple way to read and edit and save M3U file with C#.\
 this package developed with .netstandard2.1 that you can easily install it through nuget package manager
 
 [![Telegram Chat](https://img.shields.io/static/v1?label=chat&message=Telegram&color=blue&logo=telegram)](https://t.me/MhdiJml) [![GitHub license](https://img.shields.io/github/license/MahdiJamal/M3UManager)](https://github.com/MahdiJamal/M3UManager/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/M3UManager)](https://www.nuget.org/packages/M3UManager/) [![Nuget](https://img.shields.io/nuget/dt/M3UManager?label=nuget)](https://www.nuget.org/packages/M3UManager/)
 
 ## 💡 Features
 * Parse m3u inline and outline group title file.
-* Very simple edit m3u file.
+* Simple edit m3u file.
 * Save m3u inline and outline group title file.
+* All classes and properties are Observable.
 
 ## ⚙️ Installation
 You can install this package from [nuget](https://www.nuget.org/packages/M3UManager/).
+
+---
+Install latest version with Package Manager 👇🏽
 ```
-PM> Install-Package M3UManager
+PM> NuGet\Install-Package M3UManager
+```
+Install latest version with .NET CLI 👇🏽
+```
+> dotnet add package M3UManager
 ```
 
 ## 🎂 Support the development of this project
