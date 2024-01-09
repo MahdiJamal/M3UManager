@@ -1,15 +1,14 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
+﻿using System;
 
 namespace M3UManager.Models;
 
-public partial class Media : ObservableObject, ICloneable
+public partial class Media : NotifyPropertyChanged, ICloneable
 {
-    [ObservableProperty]
     private Uri _mediaUri;
+    public Uri MediaUri { get => _mediaUri; set => SetProperty(ref _mediaUri, value); }
 
-    [ObservableProperty]
     private ExtinfTag _extinfTag;
+    public ExtinfTag ExtinfTag { get => _extinfTag; set => SetProperty(ref _extinfTag, value); }
 
     public object Clone()
         => MemberwiseClone();

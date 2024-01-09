@@ -1,28 +1,28 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
+﻿using System;
 using System.Text.RegularExpressions;
 
 namespace M3UManager.Models;
 
-public partial class ExtinfTagAttributes: ObservableObject
+public partial class ExtinfTagAttributes: NotifyPropertyChanged
 {
-    [ObservableProperty]
-    private string _tvgID;
+    private string _tvgID = null;
+    public string TvgID { get => _tvgID; set => SetProperty(ref _tvgID, value); }
 
-    [ObservableProperty]
-    private string _tvgName;
+    private string _tvgName = null;
+    public string TvgName { get => _tvgName; set => SetProperty(ref _tvgName, value); }
 
-    [ObservableProperty]
-    private string _tvgLogo;
+    private string _tvgLogo = null;
+    public string TvgLogo { get => _tvgLogo; set => SetProperty(ref _tvgLogo, value); }
 
-    [ObservableProperty]
-    private string _groupTitle;
+    private string _groupTitle = null;
+    public string GroupTitle { get => _groupTitle; set => SetProperty(ref _groupTitle, value); }
 
-    [ObservableProperty]
-    private string _duration;
+    private string _duration = null;
+    public string Duration { get => _duration; set => SetProperty(ref _duration, value); }
 
-    [ObservableProperty]
-    private string _title;
+    private string _title = null;
+    public string Title { get => _title; set => SetProperty(ref _title, value); }
+
 
     public static ExtinfTagAttributes Parse(string extinfTagAttributesWithoutTagName)
     {

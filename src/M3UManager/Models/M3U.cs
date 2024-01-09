@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -7,25 +6,26 @@ using System.Threading.Tasks;
 
 namespace M3UManager.Models;
 
-public partial class M3U : ObservableObject
+public partial class M3U : NotifyPropertyChanged
 {
-    [ObservableProperty]
     private string _playListType = null;
+    public string PlayListType { get => _playListType; set => SetProperty(ref _playListType, value); }
 
-    [ObservableProperty]
     private bool _hasEndList = false;
+    public bool HasEndList { get => _hasEndList; set => SetProperty(ref _hasEndList, value); }
 
-    [ObservableProperty]
     private int? _targetDuration = null;
+    public int? TargetDuration { get => _targetDuration; set => SetProperty(ref _targetDuration, value); }
 
-    [ObservableProperty]
     private int? _version = null;
+    public int? Version { get => _version; set => SetProperty(ref _version, value); }
 
-    [ObservableProperty]
     private int? _mediaSequence = null;
+    public int? MediaSequence { get => _mediaSequence; set => SetProperty(ref _mediaSequence, value); }
 
-    [ObservableProperty]
     private ObservableCollection<Media> _medias = [];
+    public ObservableCollection<Media> Medias { get => _medias; set => SetProperty(ref _medias, value); }
+
 
     public async Task SaveM3UFileAsync(string filePathToSave, M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
         => await File.WriteAllLinesAsync(filePathToSave, CreateM3ULines(groupTitle));
