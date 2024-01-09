@@ -4,7 +4,7 @@ using System.IO;
 
 namespace M3UManager.Models;
 
-public class M3U
+public partial class M3U
 {
     public string PlayListType { get; set; }
     public bool HasEndList { get; set; }
@@ -13,14 +13,9 @@ public class M3U
     public int? MediaSequence { get; set; }
     public List<Media> Medias { get; set; } = [];
 
-    public enum GroupTitle
-    {
-        InlineGroupTitle,
-        OutlineGroupTitle
-    }
-    public void SaveToFile(string filePathToSave, GroupTitle groupTitle = GroupTitle.InlineGroupTitle)
+    public void SaveToFile(string filePathToSave, M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
         => File.WriteAllLines(filePathToSave, GetM3UAsString(groupTitle));
-    public IEnumerable<string> GetM3UAsString(GroupTitle groupTitle = GroupTitle.InlineGroupTitle)
+    public IEnumerable<string> GetM3UAsString(M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
     {
         yield return "#EXTM3U";
 
@@ -38,14 +33,14 @@ public class M3U
 
         switch (groupTitle)
         {
-            case GroupTitle.InlineGroupTitle:
+            case M3UGroupTitle.InlineGroupTitle:
                 foreach (Media media in Medias)
                 {
                     yield return $"#EXTINF:{media.ExtinfTag.TagAttributes}";
                     yield return media.StreamUri.AbsoluteUri;
                 }
                 break;
-            case GroupTitle.OutlineGroupTitle:
+            case M3UGroupTitle.OutlineGroupTitle:
                 throw new NotImplementedException();
         }
 
