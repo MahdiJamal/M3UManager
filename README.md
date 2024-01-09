@@ -6,8 +6,16 @@ this package developed with .netstandard2.1 that you can easily install it throu
 
 [![Telegram Chat](https://img.shields.io/static/v1?label=chat&message=Telegram&color=blue&logo=telegram)](https://t.me/MhdiJml) [![GitHub license](https://img.shields.io/github/license/MahdiJamal/M3UManager)](https://github.com/MahdiJamal/M3UManager/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/M3UManager)](https://www.nuget.org/packages/M3UManager/) [![Nuget](https://img.shields.io/nuget/dt/M3UManager?label=nuget)](https://www.nuget.org/packages/M3UManager/)
 
-## 💡 Installation
+## 💡 Features
+* Parse m3u inline and outline group title file.
+* Very simple edit m3u file.
+* Save m3u inline and outline group title file.
+
+## ⚙️ Installation
 You can install this package from [nuget](https://www.nuget.org/packages/M3UManager/).
+```
+PM> Install-Package M3UManager
+```
 
 ## 🎂 Support the development of this project
 Your support means a lot and it keeps me motivated to keep working on open source projects.\
