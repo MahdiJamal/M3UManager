@@ -2,6 +2,7 @@
 using M3UManager.Utilities;
 using System;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -9,8 +10,14 @@ namespace M3UManager;
 
 public static class M3UManager
 {
-    private const string M3UFileStartLine = "#EXTM3U";
+    private const string M3UFileStartLineStartWith = "#EXTM3U";
 
+    public static async Task<M3U> ParseFromUrlAsync(string url, NetworkCredential networkCredential)
+    {
+        using HttpClientHandler handler = new() { Credentials = networkCredential };
+        using HttpClient tempHttpClient = new(handler);
+        return await ParseFromUrlAsync(url, tempHttpClient);
+    }
     public static async Task<M3U> ParseFromUrlAsync(string url)
     {
         using HttpClient tempHttpClient = new();
@@ -32,11 +39,11 @@ public static class M3UManager
             throw new ArgumentNullException($"The '{nameof(m3uFileLines)}' variable value is null.");
         if (m3uFileLines.Length == 0)
             throw new ArgumentOutOfRangeException($"The '{nameof(m3uFileLines)}' array is empty.");
-        if (m3uFileLines[0].StartsWith(M3UFileStartLine) == false)
-            throw new InvalidOperationException($"The m3u file must start with '{M3UFileStartLine}'.");
+        if (m3uFileLines[0].StartsWith(M3UFileStartLineStartWith) == false)
+            throw new InvalidOperationException($"The m3u file must start with '{M3UFileStartLineStartWith}'.");
 
         M3U m3u = new();
-        Media tempMedia = new();
+        Channel tempChannel = new();
 
         // Processing in all lines except the first line
         for (int i = 1; i < m3uFileLines.Length; i++)
@@ -62,22 +69,26 @@ public static class M3UManager
                         break;
 
                     case "#EXTINF":
-                        tempMedia.ExtinfTag = new ExtinfTag(ExtinfTagAttributes.Parse(tagValueWithoutKey));
+                        tempChannel.DetectAndSetExtinfProperties(tagValueWithoutKey);
                         break;
                     case "#EXTGRP":
-                        tempMedia.ExtinfTag.TagAttributes.GroupTitle = tagValueWithoutKey;
+                        tempChannel.GroupTitle = tagValueWithoutKey;
+                        break;
+                    case "#PLAYLIST":
+                        tempChannel.Title = tagValueWithoutKey;
+                        break;
+                    case "#EXTIMG":
+                        tempChannel.TvgLogo = tagValueWithoutKey;
                         break;
 
-                    case "#EXT-X-ENDLIST":
-                        m3u.HasEndList = true;
-                        break;
+                    case "#EXT-X-ENDLIST": m3u.HasEndList = true; break;
                 }
             }
             else if (m3uFileLines[i].StartsWith("http"))
             {
-                tempMedia.MediaUri = new Uri(m3uFileLines[i]);
-                m3u.Medias.Add(tempMedia.Clone<Media>());
-                tempMedia.Reset();
+                tempChannel.MediaUrl = m3uFileLines[i];
+                m3u.Channels.Add(tempChannel.Clone<Channel>());
+                tempChannel.Reset();
             }
         }
 
