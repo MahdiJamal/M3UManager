@@ -29,7 +29,7 @@ public partial class M3U : NotifyPropertyChanged
 
     public async Task SaveM3UFileAsync(string filePathToSave, M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
         => await File.WriteAllLinesAsync(filePathToSave, CreateM3ULines(groupTitle));
-    public void CreateM3UText(M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
+    public string CreateM3UText(M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
         => string.Join("\r\n", CreateM3ULines(groupTitle));
     public IEnumerable<string> CreateM3ULines(M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
     {
