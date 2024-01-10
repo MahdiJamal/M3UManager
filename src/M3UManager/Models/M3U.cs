@@ -23,8 +23,8 @@ public partial class M3U : NotifyPropertyChanged
     private int? _mediaSequence = null;
     public int? MediaSequence { get => _mediaSequence; set => SetProperty(ref _mediaSequence, value); }
 
-    private ObservableCollection<Media> _medias = [];
-    public ObservableCollection<Media> Medias { get => _medias; set => SetProperty(ref _medias, value); }
+    private ObservableCollection<Channel> _channels = [];
+    public ObservableCollection<Channel> Channels { get => _channels; set => SetProperty(ref _channels, value); }
 
 
     public async Task SaveM3UFileAsync(string filePathToSave, M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
@@ -47,18 +47,8 @@ public partial class M3U : NotifyPropertyChanged
         if (MediaSequence != null)
             yield return $"#EXT-X-MEDIA-SEQUENCE:{MediaSequence}";
 
-        switch (groupTitle)
-        {
-            case M3UGroupTitle.InlineGroupTitle:
-                foreach (Media media in Medias)
-                {
-                    yield return $"#EXTINF:{media.ExtinfTag.TagAttributes}";
-                    yield return media.MediaUri.AbsoluteUri;
-                }
-                break;
-            case M3UGroupTitle.OutlineGroupTitle:
-                throw new NotImplementedException();
-        }
+        foreach (Channel channel in Channels)
+            yield return channel.ChannelToString(groupTitle);
 
         if (HasEndList)
             yield return $"#EXT-X-ENDLIST";
