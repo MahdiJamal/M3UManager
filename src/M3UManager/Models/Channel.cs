@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -36,7 +37,7 @@ public partial class Channel : NotifyPropertyChanged, ICloneable
             TvgName = Regex.Match(extinfTagAttributesWithoutTagName, "tvg-name=\"(.*?)\"", RegexOptions.IgnoreCase).Groups[1].Value;
             TvgLogo = Regex.Match(extinfTagAttributesWithoutTagName, "tvg-logo=\"(.*?)\"", RegexOptions.IgnoreCase).Groups[1].Value;
             GroupTitle = Regex.Match(extinfTagAttributesWithoutTagName, "group-title=\"(.*?)\"", RegexOptions.IgnoreCase).Groups[1].Value;
-            Title = string.Join("", extinfTagAttributesWithoutTagName.Split(',')[1..]);
+            Title = string.Join("", extinfTagAttributesWithoutTagName.Split(',').Skip(1));
         }
         catch (Exception ex)
         {
