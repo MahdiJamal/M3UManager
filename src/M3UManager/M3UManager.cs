@@ -29,8 +29,8 @@ public static class M3UManager
         string httpResponseMessageString = await httpResponseMessage.Content.ReadAsStringAsync();
         return ParseFromString(httpResponseMessageString);
     }
-    public static async Task<M3U> ParseFromFileAsync(string m3uFilePath)
-        => ParseFromLines(await File.ReadAllLinesAsync(m3uFilePath));
+    public static M3U ParseFromFile(string m3uFilePath)
+        => ParseFromLines(File.ReadAllLines(m3uFilePath));
     public static M3U ParseFromString(string m3uFileContent)
         => ParseFromLines(m3uFileContent.Split("\r\n", "\n", "\r"));
     public static M3U ParseFromLines(string[] m3uFileLines)
