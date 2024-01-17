@@ -33,11 +33,22 @@ public partial class Channel : NotifyPropertyChanged, ICloneable
         try
         {
             Duration = extinfTagAttributesWithoutTagName.Split(' ')[0];
-            TvgID = Regex.Match(extinfTagAttributesWithoutTagName, "tvg-id=\"(.*?)\"", RegexOptions.IgnoreCase).Groups[1].Value;
-            TvgName = Regex.Match(extinfTagAttributesWithoutTagName, "tvg-name=\"(.*?)\"", RegexOptions.IgnoreCase).Groups[1].Value;
-            TvgLogo = Regex.Match(extinfTagAttributesWithoutTagName, "tvg-logo=\"(.*?)\"", RegexOptions.IgnoreCase).Groups[1].Value;
-            GroupTitle = Regex.Match(extinfTagAttributesWithoutTagName, "group-title=\"(.*?)\"", RegexOptions.IgnoreCase).Groups[1].Value;
             Title = string.Join("", extinfTagAttributesWithoutTagName.Split(',').Skip(1));
+
+            MatchCollection matches = Regex.Matches(extinfTagAttributesWithoutTagName, "(tvg-id|tvg-name|tvg-logo|group-title)=\"(.*?)\"", RegexOptions.IgnoreCase);
+            foreach (Match match in matches)
+            {
+                string attributeName = match.Groups[0].Value;
+                string attributeValue = match.Groups[1].Value;
+
+                switch (attributeName)
+                {
+                    case "tvg-id": TvgID = attributeValue; break;
+                    case "tvg-name": TvgName = attributeValue; break;
+                    case "tvg-logo": TvgLogo = attributeValue; break;
+                    case "group-title": GroupTitle = attributeValue; break;
+                }
+            }
         }
         catch (Exception ex)
         {

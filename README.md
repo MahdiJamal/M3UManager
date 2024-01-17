@@ -2,7 +2,7 @@
 
 **Created with ❤ in Iran by Mahdi Jamal**\
 A simple way to read and edit and save M3U file with C#.\
-this package developed with .netstandard2 that you can easily install it through nuget package manager
+This package developed with .netstandard2 that you can easily install it through nuget package manager.
 
 [![Telegram Chat](https://img.shields.io/static/v1?label=chat&message=Telegram&color=blue&logo=telegram)](https://t.me/MhdiJml) [![GitHub license](https://img.shields.io/github/license/MahdiJamal/M3UManager)](https://github.com/MahdiJamal/M3UManager/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/M3UManager)](https://www.nuget.org/packages/M3UManager/) [![Nuget](https://img.shields.io/nuget/dt/M3UManager?label=nuget)](https://www.nuget.org/packages/M3UManager/)
 
