@@ -9,9 +9,10 @@
 		<Title>M3U Manager</Title>
 		<PackageTags>audio;channel;exm3u;format;hls;iptv;live;m3u;m3u8;manager;media;movie;music;package;parser;playlist;playlists;television;tools;tv;video</PackageTags>
 		<RepositoryUrl>https://github.com/MahdiJamal/M3UManager</RepositoryUrl>
+		<PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<RepositoryType>git</RepositoryType>
-		<AssemblyVersion>1.0.3.2</AssemblyVersion>
+		<AssemblyVersion>1.0.3.3</AssemblyVersion>
 		<FileVersion>$(AssemblyVersion)</FileVersion>
 		<Version>$(AssemblyVersion)</Version>
 		<Authors>MahdiJamal</Authors>
