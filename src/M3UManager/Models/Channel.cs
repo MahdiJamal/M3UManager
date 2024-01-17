@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -28,32 +29,23 @@ public partial class Channel : NotifyPropertyChanged, ICloneable
     public string Title { get => _title; set => SetProperty(ref _title, value); }
     private string _title = null;
 
+    private static Dictionary<string, string> ExtractExtinfAttributes(string extinfTagAttributesWithoutTagName)
+    {
+        const string pattern = @"(?<=\s|\n|^)([a-z\-]+)=\""(.+?)\""";
+
+        return Regex.Matches(extinfTagAttributesWithoutTagName, pattern, RegexOptions.IgnoreCase)
+                                .Cast<Match>()
+                                .ToDictionary(match => match.Groups[0].Value, match => match.Groups[1].Value);
+    }
+
     public void DetectAndSetExtinfProperties(string extinfTagAttributesWithoutTagName)
     {
-        try
-        {
-            Duration = extinfTagAttributesWithoutTagName.Split(' ')[0];
-            Title = string.Join("", extinfTagAttributesWithoutTagName.Split(',').Skip(1));
+        var attributes = ExtractExtinfAttributes(extinfTagAttributesWithoutTagName);
 
-            MatchCollection matches = Regex.Matches(extinfTagAttributesWithoutTagName, "(tvg-id|tvg-name|tvg-logo|group-title)=\"(.*?)\"", RegexOptions.IgnoreCase);
-            foreach (Match match in matches)
-            {
-                string attributeName = match.Groups[0].Value;
-                string attributeValue = match.Groups[1].Value;
-
-                switch (attributeName)
-                {
-                    case "tvg-id": TvgID = attributeValue; break;
-                    case "tvg-name": TvgName = attributeValue; break;
-                    case "tvg-logo": TvgLogo = attributeValue; break;
-                    case "group-title": GroupTitle = attributeValue; break;
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"{extinfTagAttributesWithoutTagName}\r\n\r\n{ex.Message}");
-        }
+        TvgID = attributes.ContainsKey("tvg-id") ? attributes["tvg-id"] : null;
+        TvgName = attributes.ContainsKey("tvg-name") ? attributes["tvg-name"] : null;
+        TvgLogo = attributes.ContainsKey("tvg-logo") ? attributes["tvg-logo"] : null;
+        GroupTitle = attributes.ContainsKey("group-title") ? attributes["group-title"] : null;
     }
 
     /// <summary>
