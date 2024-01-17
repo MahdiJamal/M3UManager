@@ -7,9 +7,8 @@
 		<Nullable>disable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>M3U Manager</Title>
-		<PackageTags>audio;channel;exm3u;format;hls;http;https;iptv;list;live;m3u;m3u8;manager;media;movie;music;package;parser;playlist;playlists;television;tools;tv;video</PackageTags>
+		<PackageTags>audio;channel;exm3u;format;hls;iptv;live;m3u;m3u8;manager;media;movie;music;package;parser;playlist;playlists;television;tools;tv;video</PackageTags>
 		<RepositoryUrl>https://github.com/MahdiJamal/M3UManager</RepositoryUrl>
-		<PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<RepositoryType>git</RepositoryType>
 		<AssemblyVersion>1.0.3.2</AssemblyVersion>
