@@ -12,7 +12,7 @@
 		<PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<RepositoryType>git</RepositoryType>
-		<AssemblyVersion>1.0.5.0</AssemblyVersion>
+		<AssemblyVersion>1.0.5.2</AssemblyVersion>
 		<FileVersion>$(AssemblyVersion)</FileVersion>
 		<Version>$(AssemblyVersion)</Version>
 		<Authors>MahdiJamal</Authors>

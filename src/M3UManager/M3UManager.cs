@@ -1,6 +1,7 @@
 ﻿using M3UManager.Helpers;
 using M3UManager.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -89,7 +90,12 @@ public static class M3UManager
                 // #EXTGRP:Undefined
                 // https://le.as.v/aslv/iex.m3u8
 
-                outputM3U.Channels.Add(DetectChannelFromExtinfItem(tempStackString));
+                try
+                {
+                    Channel detectedChannelFromExtinfItem = DetectChannelFromExtinfItem(tempStackString);
+                    outputM3U.Channels.Add(detectedChannelFromExtinfItem);
+                }
+                catch { }
 
                 tempStackString.Clear();
             }
@@ -166,35 +172,44 @@ public static class M3UManager
             MediaUrl = extinfItemLines.Pop()
         };
 
-        // Detect tags
-        if (extinfItemLines.Count != 1)
-            for (int i = 0; i <= extinfItemLines.Count; i++)
+        while (extinfItemLines.Count > 0)
+        {
+            string extinfItemLine = extinfItemLines.Pop();
+            if (string.IsNullOrWhiteSpace(extinfItemLine))
+                continue;
+
+            string tagKey = extinfItemLine.Split(':')[0];
+            string tagValueWithoutKey = extinfItemLine.Remove(0, (tagKey + ':').Length);
+
+            // Detect tags
+            switch (tagKey)
             {
-                string extinfItemLine = extinfItemLines.Pop();
-                string tagKey = extinfItemLine.Split(':')[0];
-                string tagValueWithoutKey = extinfItemLine.Remove(0, (tagKey + ':').Length);
+                case "#EXTGRP":
+                    outputChannel.GroupTitle = tagValueWithoutKey;
+                    break;
+                case "#PLAYLIST":
+                    outputChannel.Title = tagValueWithoutKey;
+                    break;
+                case "#EXTIMG":
+                    outputChannel.Logo = tagValueWithoutKey;
+                    break;
 
-                switch (tagKey)
-                {
-                    case "#EXTGRP": outputChannel.GroupTitle = tagValueWithoutKey; break;
-                    case "#PLAYLIST": outputChannel.Title = tagValueWithoutKey; break;
-                    case "#EXTIMG": outputChannel.Logo = tagValueWithoutKey; break;
-                }
+
+                // Detect EXTINF attributes
+                case "#EXTINF":
+                    var extinfAttributes = ExtractExtinfAttributes(tagValueWithoutKey);
+                    outputChannel.TvgID ??= extinfAttributes.GetValueOrDefault("tvg-id", null);
+                    outputChannel.TvgName ??= extinfAttributes.GetValueOrDefault("tvg-name", null);
+                    outputChannel.Logo ??= extinfAttributes.GetValueOrDefault("tvg-logo", null);
+                    outputChannel.GroupTitle ??= extinfAttributes.GetValueOrDefault("group-title", null);
+
+                    if (tagValueWithoutKey.Contains(','))
+                        outputChannel.Title ??= tagValueWithoutKey.Remove(0, (tagValueWithoutKey.Split(',')[0] + ',').Length);
+
+                    outputChannel.Duration ??= tagValueWithoutKey.Split(' ')[0];
+                    break;
             }
-
-        // Detect attributes
-        string extinfTagFirstLine = extinfItemLines.Pop();
-        string extinfTagAttributesWithoutTagName = extinfTagFirstLine.Remove(0, /* "#EXTINF:".Length */ 8);
-        var extinfAttributes = ExtractExtinfAttributes(extinfTagAttributesWithoutTagName);
-        outputChannel.TvgID ??= extinfAttributes.GetValueOrDefault("tvg-id", null);
-        outputChannel.TvgName ??= extinfAttributes.GetValueOrDefault("tvg-name", null);
-        outputChannel.Logo ??= extinfAttributes.GetValueOrDefault("tvg-logo", null);
-        outputChannel.GroupTitle ??= extinfAttributes.GetValueOrDefault("group-title", null);
-
-        if (extinfTagAttributesWithoutTagName.Contains(','))
-            outputChannel.Title ??= extinfTagAttributesWithoutTagName.Remove(0, (extinfTagAttributesWithoutTagName.Split(',')[0] + ',').Length);
-
-        outputChannel.Duration ??= extinfTagAttributesWithoutTagName.Split(' ')[0];
+        }
 
         // Return output
         return outputChannel;
