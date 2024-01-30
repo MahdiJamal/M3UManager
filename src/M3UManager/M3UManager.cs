@@ -54,7 +54,7 @@ public static class M3UManager
         {
             string m3uFileLine = m3uFileLines[i];
 
-            if (m3uFileLine.StartsWith("#EXT-X"))
+            if (m3uFileLine.StartsWith("#EXT-X") && m3uFileLine.Contains(":"))
             {
                 string tagKey = m3uFileLine.Split(':')[0];
                 string tagValueWithoutKey = m3uFileLine.Remove(0, (tagKey + ':').Length);
