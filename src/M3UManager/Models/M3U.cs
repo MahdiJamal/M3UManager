@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Text;
 
 namespace M3UManager.Models;
 
@@ -25,11 +26,18 @@ public partial class M3U : NotifyPropertyChanged
     public ObservableCollection<Channel> Channels { get => _channels; set => SetProperty(ref _channels, value); }
 
 
-    public void SaveM3UFile(string filePathToSave, M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
+    public void SaveM3UFile(string filePathToSave, M3UType groupTitle = M3UType.TagsType)
         => File.WriteAllLines(filePathToSave, CreateM3ULines(groupTitle));
-    public string CreateM3UText(M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
-        => string.Join("\r\n", CreateM3ULines(groupTitle));
-    public IEnumerable<string> CreateM3ULines(M3UGroupTitle groupTitle = M3UGroupTitle.InlineGroupTitle)
+    public string CreateM3UText(M3UType groupTitle = M3UType.TagsType)
+    {
+        StringBuilder stringBuilder = new();
+
+        foreach (string line in CreateM3ULines(groupTitle))
+            stringBuilder.AppendLine(line);
+
+        return stringBuilder.ToString();
+    }
+    public IEnumerable<string> CreateM3ULines(M3UType groupTitle = M3UType.TagsType)
     {
         yield return "#EXTM3U";
 
@@ -49,6 +57,6 @@ public partial class M3U : NotifyPropertyChanged
             yield return channel.ChannelToString(groupTitle);
 
         if (HasEndList)
-            yield return $"#EXT-X-ENDLIST";
+            yield return "#EXT-X-ENDLIST";
     }
 }
