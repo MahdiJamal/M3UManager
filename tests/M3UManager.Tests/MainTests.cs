@@ -78,7 +78,7 @@ public class MainTests
     {
         ArgumentNullException.ThrowIfNull(nameof(channel), $"'{nameof(channel)}' variable value is null.");
 
-        string channelToStringValue = channel.ChannelToString(m3uType);
+        string channelToStringValue = channel.ToString(m3uType);
 
         Assert.That(channelToStringValue, Is.EqualTo(expectedChannelString));
     }
