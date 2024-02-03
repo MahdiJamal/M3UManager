@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -13,6 +14,51 @@ namespace M3UManager;
 
 public static class M3UManager
 {
+    #region Deserialize
+
+    public static void SaveM3U(this M3U m3u, string filePathToSave, M3UType groupTitle)
+        => File.WriteAllLines(filePathToSave, CreateM3ULines(m3u, groupTitle));
+    public static async Task SaveM3U(this M3U m3u, StreamWriter streamWriter, M3UType groupTitle)
+    {
+        foreach (string m3uLine in CreateM3ULines(m3u, groupTitle))
+            await streamWriter.WriteLineAsync(m3uLine);
+    }
+    public static string CreateM3UText(this M3U m3u, M3UType groupTitle)
+    {
+        StringBuilder stringBuilder = new();
+
+        foreach (string line in CreateM3ULines(m3u, groupTitle))
+            stringBuilder.AppendLine(line);
+
+        return stringBuilder.ToString();
+    }
+    public static IEnumerable<string> CreateM3ULines(this M3U m3u, M3UType groupTitle)
+    {
+        yield return "#EXTM3U";
+
+        if (m3u.PlayListType != null)
+            yield return $"#EXT-X-PLAYLIST-TYPE:{m3u.PlayListType}";
+
+        if (m3u.TargetDuration != null)
+            yield return $"#EXT-X-TARGETDURATION:{m3u.TargetDuration}";
+
+        if (m3u.Version != null)
+            yield return $"#EXT-X-VERSION:{m3u.Version}";
+
+        if (m3u.MediaSequence != null)
+            yield return $"#EXT-X-MEDIA-SEQUENCE:{m3u.MediaSequence}";
+
+        foreach (Channel channel in m3u.Channels)
+            yield return channel.ToString(groupTitle);
+
+        if (m3u.HasEndList)
+            yield return "#EXT-X-ENDLIST";
+    }
+
+    #endregion
+
+    #region Serialize
+
     private const string M3UFileStartLineStartWith = "#EXTM3U";
 
     public static async Task<M3U> ParseFromUrlAsync(string url, NetworkCredential networkCredential)
@@ -28,7 +74,7 @@ public static class M3UManager
     }
     public static async Task<M3U> ParseFromUrlAsync(string url, HttpClient client)
     {
-        HttpResponseMessage httpResponseMessage = await client.GetAsync(url);
+        using HttpResponseMessage httpResponseMessage = await client.GetAsync(url);
         string httpResponseMessageString = await httpResponseMessage.Content.ReadAsStringAsync();
         return ParseFromString(httpResponseMessageString);
     }
@@ -84,9 +130,6 @@ public static class M3UManager
 
         return outputM3U;
     }
-
-
-
 
     private static SetM3UPropertyResult TrySetM3UPropertyByTagName(ref M3U m3u, KeyValuePair<string, string> tagKeyAndName)
     {
@@ -210,13 +253,6 @@ public static class M3UManager
         return false;
     }
 
-
-
-
-
-
-
-
     /// <summary>
     /// Extinf tag attributes segmentation.
     /// </summary>
@@ -298,4 +334,6 @@ public static class M3UManager
         // Return output
         return outputChannel;
     }
+
+    #endregion
 }

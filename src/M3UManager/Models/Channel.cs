@@ -1,9 +1,9 @@
-﻿using System;
+﻿using M3UManager.Helpers;
 using System.Text;
 
 namespace M3UManager.Models;
 
-public partial class Channel : NotifyPropertyChanged, ICloneable
+public class Channel : ModelBaseClass
 {
     public string MediaUrl { get => _mediaUrl; set => SetProperty(ref _mediaUrl, value); }
     private string _mediaUrl = null;
@@ -27,7 +27,7 @@ public partial class Channel : NotifyPropertyChanged, ICloneable
     private string _title = null;
 
     /// <summary>
-    /// This method for serialize <see cref="Channel"/> to <see cref="string"/>.
+    /// This method for deserialize <see cref="Channel"/> to <see cref="string"/>.
     /// </summary>
     /// <returns>
     /// <see cref="M3UType.AttributesType"/> example:
@@ -49,59 +49,37 @@ public partial class Channel : NotifyPropertyChanged, ICloneable
     /// #EXTGRP:Undefined
     /// </example>
     /// </returns>
-    public string ChannelToString(M3UType m3uType)
+    public static string ChannelToString(Channel channel, M3UType m3uType)
     {
         StringBuilder sb = new();
 
-        sb.Append($"#EXTINF:{Duration}");
+        sb.Append($"#EXTINF:{channel.Duration}");
 
-        if (TvgID != null)
-            sb.Append($" tvg-id=\"{TvgID}\"");
+        sb.AppendIf(channel.TvgID != null, $" tvg-id=\"{channel.TvgID}\"");
 
-        if (TvgName != null)
-            sb.Append($" tvg-name=\"{TvgName}\"");
+        sb.AppendIf(channel.TvgName != null, $" tvg-name=\"{channel.TvgName}\"");
 
         if (m3uType == M3UType.TagsType)
         {
-            if (Logo != null)
-                sb.Append($" tvg-logo=\"{Logo}\"");
-
-            if (GroupTitle != null)
-                sb.Append($" group-title=\"{GroupTitle}\"");
+            sb.AppendIf(channel.Logo != null, $" tvg-logo=\"{channel.Logo}\"");
+            sb.AppendIf(channel.GroupTitle != null, $" group-title=\"{channel.GroupTitle}\"");
         }
 
-        sb.Append($",{Title ?? ""}");
+        sb.Append($",{channel.Title ?? ""}");
 
         if (m3uType == M3UType.AttributesType)
         {
-            if (GroupTitle != null)
-                sb.Append($"\r\n#EXTGRP:{GroupTitle}");
-
-            if (Logo != null)
-                sb.Append($"\r\n#EXTIMG:{Logo}");
-
-            if (Title != null)
-                sb.Append($"\r\n#PLAYLIST:{Title}");
+            sb.AppendIf(channel.GroupTitle != null, $"\r\n#EXTGRP:{channel.GroupTitle}");
+            sb.AppendIf(channel.Logo != null, $"\r\n#EXTIMG:{channel.Logo}");
+            sb.AppendIf(channel.Title != null, $"\r\n#PLAYLIST:{channel.Title}");
         }
 
-        sb.Append($"\r\n{MediaUrl ?? ""}");
+        sb.Append($"\r\n{channel.MediaUrl ?? ""}");
 
         return sb.ToString();
     }
 
-    public object Clone()
-        => MemberwiseClone();
-    public T Clone<T>()
-        => (T)Clone();
-
-    public void Reset2()
-    {
-        MediaUrl = null;
-        TvgID = null;
-        TvgName = null;
-        Logo = null;
-        GroupTitle = null;
-        Duration = null;
-        Title = null;
-    }
+    /// <inheritdoc cref="ChannelToString(Channel, M3UType)"/>
+    public string ToString(M3UType m3uType)
+        => ChannelToString(this, m3uType);
 }
