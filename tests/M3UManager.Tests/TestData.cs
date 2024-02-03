@@ -59,6 +59,9 @@ http://0.0.0.0/hbbh/stream.m3u8
 http://0.0.0.0/hbbh/stream.m3u8
 """;
 
-    public static readonly Stack<string> SampleM3ULines
+    public static readonly Stack<string> SampleM3ULinesStack
+        = new(SampleM3UContent.Split(["\r\n", "\n", "\r"], StringSplitOptions.None));
+
+    public static readonly List<string> SampleM3ULinesList
         = new(SampleM3UContent.Split(["\r\n", "\n", "\r"], StringSplitOptions.None));
 }
