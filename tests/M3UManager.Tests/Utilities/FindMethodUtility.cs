@@ -8,9 +8,9 @@ public static class FindMethodUtility
     {
         MethodInfo? detectChannelFromExtinfItemMethod = classType.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Static);
         if (detectChannelFromExtinfItemMethod == null)
-            throw new NullReferenceException($"'{nameof(detectChannelFromExtinfItemMethod)}' variable value is null.");
+            throw new InvalidOperationException($"Method not found in this class.");
 
         TResult? result = (TResult?)detectChannelFromExtinfItemMethod.Invoke(null, methodCallArguments);
-        return result ?? throw new NullReferenceException($"'{nameof(result)}' variable value is null.");
+        return result ?? throw new InvalidOperationException($"Failed call to method ( check outputs or inputs to fix this ).");
     }
 }
