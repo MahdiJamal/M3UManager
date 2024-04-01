@@ -275,7 +275,7 @@ public static class M3UManager
         if (extinfTagAttributesWithoutTagName == null)
             throw new ArgumentNullException($"'{nameof(extinfTagAttributesWithoutTagName)}' variable value is null.");
 
-        const string regexPattern = @"(?<=\s|\n|^)([a-z\-]+)=\""(.+?)\""";
+        const string regexPattern = @"(?<=\s|\n|^)([a-z\-]+)=\""(|.+?)\""";
 
         return Regex.Matches(extinfTagAttributesWithoutTagName, regexPattern, RegexOptions.IgnoreCase)
                                 .Cast<Match>()
