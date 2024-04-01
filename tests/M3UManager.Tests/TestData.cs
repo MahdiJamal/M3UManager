@@ -7,7 +7,7 @@ public class TestData
     //********** Attributes extinf **********//
 
     public const string SampleAttributesExtinfContent = """
-#EXTINF:-1 tvg-id="HDTV.fr" tvg-logo="https://y.imyr.cm/xy70wD.png" group-title="Undefined",HDTV (720p)
+#EXTINF:-1 tvg-id="HDTV.fr" tvg-logo="https://y.imyr.cm/xy70wD.png" group-title="",HDTV (720p)
 http://0.0.0.0/hbbh/stream.m3u8
 """;
 
@@ -18,7 +18,7 @@ http://0.0.0.0/hbbh/stream.m3u8
     {
         Title = "HDTV (720p)",
         Duration = "-1",
-        GroupTitle = "Undefined",
+        GroupTitle = "",
         TvgID = "HDTV.fr",
         Logo = "https://y.imyr.cm/xy70wD.png",
         TvgName = null,
@@ -29,7 +29,7 @@ http://0.0.0.0/hbbh/stream.m3u8
 
     public const string SampleTagsExtinfContent = """
 #EXTINF:-1 tvg-id="HDTV.fr",HDTV (720p)
-#EXTGRP:Undefined
+#EXTGRP:
 #EXTIMG:https://y.imyr.cm/xy70wD.png
 #PLAYLIST:HDTV (720p)
 http://0.0.0.0/hbbh/stream.m3u8
@@ -42,7 +42,7 @@ http://0.0.0.0/hbbh/stream.m3u8
     {
         Title = "HDTV (720p)",
         Duration = "-1",
-        GroupTitle = "Undefined",
+        GroupTitle = "",
         TvgID = "HDTV.fr",
         Logo = "https://y.imyr.cm/xy70wD.png",
         TvgName = null,
@@ -53,7 +53,7 @@ http://0.0.0.0/hbbh/stream.m3u8
 
     public const string SampleM3UContent = """
 #EXTM3U
-#EXTINF:-1 tvg-id="HDTV.fr" tvg-logo="https://o.imur.om/xyW0wD.png" group-title="Undefined",HDTV (720p) [Not 24/7]
+#EXTINF:-1 tvg-id="HDTV.fr" tvg-logo="https://o.imur.om/xyW0wD.png" group-title="",HDTV (720p) [Not 24/7]
 http://0.0.0.0/hbbh/stream.m3u8
 #EXTINF:-1 tvg-id="HDTV.fr" tvg-logo="https://y.imyr.cm/xy70wD.png" group-title="Undefined",HDTV (720p)
 http://0.0.0.0/hbbh/stream.m3u8

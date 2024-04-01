@@ -30,7 +30,7 @@ public class MainTests
             Assert.That(parsedM3U.Channels[0].MediaUrl, Is.EqualTo("http://0.0.0.0/hbbh/stream.m3u8"));
             Assert.That(parsedM3U.Channels[0].Duration, Is.EqualTo("-1"));
             Assert.That(parsedM3U.Channels[0].Title, Is.EqualTo("HDTV (720p) [Not 24/7]"));
-            Assert.That(parsedM3U.Channels[0].GroupTitle, Is.EqualTo("Undefined"));
+            Assert.That(parsedM3U.Channels[0].GroupTitle, Is.Empty);
             Assert.That(parsedM3U.Channels[0].TvgName, Is.EqualTo(null));
             Assert.That(parsedM3U.Channels[0].TvgID, Is.EqualTo("HDTV.fr"));
             Assert.That(parsedM3U.Channels[0].Logo, Is.EqualTo("https://o.imur.om/xyW0wD.png"));
@@ -57,7 +57,7 @@ public class MainTests
             Assert.That(channel.MediaUrl, Is.EqualTo("http://0.0.0.0/hbbh/stream.m3u8"));
             Assert.That(channel.Duration, Is.EqualTo("-1"));
             Assert.That(channel.Title, Is.EqualTo("HDTV (720p)"));
-            Assert.That(channel.GroupTitle, Is.EqualTo("Undefined"));
+            Assert.That(channel.GroupTitle, Is.Empty);
             Assert.That(channel.TvgName, Is.EqualTo(null));
             Assert.That(channel.TvgID, Is.EqualTo("HDTV.fr"));
             Assert.That(channel.Logo, Is.EqualTo("https://y.imyr.cm/xy70wD.png"));

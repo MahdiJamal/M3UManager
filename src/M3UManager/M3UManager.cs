@@ -189,7 +189,7 @@ public static class M3UManager
                     m3uChannel.Logo = tagKeyAndName.Value;
                     break;
                 case "EXTINF":
-                    TrySetM3UChannelPropertyByExtinfAttributes(ref m3uChannel, tagKeyAndName.Value);
+                    TrySetM3UChannelPropertyByExtinfAttributes(m3uChannel, tagKeyAndName.Value);
                     break;
                 default:
                     return SetM3UChannelPropertyResult.Else;
@@ -202,7 +202,7 @@ public static class M3UManager
 
         return SetM3UChannelPropertyResult.Successful;
     }
-    private static bool TrySetM3UChannelPropertyByExtinfAttributes(ref Channel m3uChannel, string tagValue)
+    private static bool TrySetM3UChannelPropertyByExtinfAttributes(Channel m3uChannel, string tagValue)
     {
         try
         {
