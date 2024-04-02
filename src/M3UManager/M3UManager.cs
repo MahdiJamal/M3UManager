@@ -103,7 +103,7 @@ public static class M3UManager
 
             if (successfulyDetectedM3ULineTag)
             {
-                var setPropertyByTagNameResult = TrySetM3UPropertyByTagName(ref outputM3U, detectedM3ULineTag);
+                var setPropertyByTagNameResult = TrySetM3UPropertyByTagName(outputM3U, detectedM3ULineTag);
 
                 if (setPropertyByTagNameResult == SetM3UPropertyResult.Else)
                     tempStackString.Push(m3uFileLine);
@@ -131,7 +131,7 @@ public static class M3UManager
         return outputM3U;
     }
 
-    private static SetM3UPropertyResult TrySetM3UPropertyByTagName(ref M3U m3u, KeyValuePair<string, string> tagKeyAndName)
+    private static SetM3UPropertyResult TrySetM3UPropertyByTagName(M3U m3u, KeyValuePair<string, string> tagKeyAndName)
     {
         try
         {
@@ -168,7 +168,7 @@ public static class M3UManager
 
         return SetM3UPropertyResult.Successful;
     }
-    private static SetM3UChannelPropertyResult TrySetM3UChannelPropertyByTagName(ref Channel m3uChannel, KeyValuePair<string, string> tagKeyAndName)
+    private static SetM3UChannelPropertyResult TrySetM3UChannelPropertyByTagName(Channel m3uChannel, KeyValuePair<string, string> tagKeyAndName)
     {
         try
         {
@@ -328,7 +328,7 @@ public static class M3UManager
             bool successfulyDetectedM3ULineTag = TryDetectM3ULineTag(extinfItemLine, out var detectedM3ULineTag);
 
             if (successfulyDetectedM3ULineTag)
-                TrySetM3UChannelPropertyByTagName(ref outputChannel, detectedM3ULineTag);
+                TrySetM3UChannelPropertyByTagName(outputChannel, detectedM3ULineTag);
         }
 
         // Return output
