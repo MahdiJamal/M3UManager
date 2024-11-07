@@ -16,7 +16,8 @@ public class Channel : ModelBaseClass
 
     public string Logo { get => _tvgLogo; set => SetProperty(ref _tvgLogo, value); }
     private string _tvgLogo = null;
-
+    public string GroupId{ get => _groupId; set => SetProperty(ref _groupId, value); }
+    private string _groupId = null;
     public string GroupTitle { get => _groupTitle; set => SetProperty(ref _groupTitle, value); }
     private string _groupTitle = null;
 
@@ -62,6 +63,7 @@ public class Channel : ModelBaseClass
         if (m3uType == M3UType.TagsType)
         {
             sb.AppendIf(channel.Logo != null, $" tvg-logo=\"{channel.Logo}\"");
+            sb.AppendIf(channel.GroupId != null, $" group-id=\"{channel.GroupId}\"");
             sb.AppendIf(channel.GroupTitle != null, $" group-title=\"{channel.GroupTitle}\"");
         }
 
